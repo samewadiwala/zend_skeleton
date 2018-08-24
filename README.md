@@ -1,4 +1,5 @@
 # zend_skeleton
+
 $(document).on('change',"#image",function(event) {
         var file = this.files[0];
        	_this = $(this);
@@ -25,7 +26,6 @@ $(document).on('change',"#image",function(event) {
 		                $('.success-msg').removeClass('hidden').delay( 4000 ).fadeOut( 1000 );
 						$('#profile_pic').attr('src',res.src);
 						$('#header-profile-pic').attr('src',res.src);
-						
 						break;
 					case 'failure' :
 						$('#error').html(res.msg);

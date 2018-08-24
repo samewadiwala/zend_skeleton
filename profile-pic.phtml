@@ -1,0 +1,43 @@
+<div class="profile-timeline-wrapper">
+	<div class="profile-cover">
+		<?php 
+            $cover_pic = ($this->userDetail['cover_pic']) ? $this->userDetail['cover_pic'] : $this->baseUrl('public/image/profile-cover.jpg');
+        ?>
+		<div style="background : url('<?= $cover_pic ?>');background-size: 100%;" id="cover_pic" class="cover-pic"></div>
+	</div>
+	<div class="profile-person-details gray-50">
+		<div class="container">
+			<div class="profile-pic-box">
+				<?php 
+                    $profile_pic = ($this->userDetail['profile_pic']) ? $this->userDetail['profile_pic'] : $this->baseUrl('public/image/avatar.jpg');
+                ?>
+                <img src="<?= $profile_pic ?>" id="profile_pic">
+			</div>
+			<div class="profile-data-box">
+				<div class="person-name">
+					<?= $this->userDetail['first_name'].' '.$this->userDetail['last_name']  ?>
+				</div>
+				<div class="person-designation">
+					<?= $this->userDetail['designation'] ?>
+				</div>
+				<div class="star-rating-box">
+					<?php $rating = ($this->userDetail->getAvgRating()->toArray());  ?>
+					<?php if($rating['avg']) { ?>
+                        <span id="star-rating-<?= $this->userDetail['id'] ?>" class="star-ratings list-left"></span>
+                        <span class="list-right"> <?= ($rating['avg']) ? number_format($rating['avg'],2) : '' ?> <?= ($rating['total']) ? '( '.$rating['total'].' ratings)' : '' ?></span>
+                        <script type="text/javascript">
+                            $('#star-rating-<?= $this->userDetail['id'] ?>').raty({
+                                half        : true,
+                                score       : <?= ($rating['avg']) ? $rating['avg'] : 0 ?>,
+                                readOnly    : true,
+                                starHalf    : "<?= $this->baseUrl('public/image/star/star-half.png') ?>",
+                                starOff     : "<?= $this->baseUrl('public/image/star/star-off.png') ?>",
+                                starOn      : "<?= $this->baseUrl('public/image/star/star-on.png') ?>",  
+                            });
+                        </script>
+                    <?php } ?> 
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
